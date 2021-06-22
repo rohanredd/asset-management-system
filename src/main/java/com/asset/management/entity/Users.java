@@ -1,11 +1,7 @@
 package com.asset.management.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 import org.hibernate.annotations.GenericGenerator;
@@ -39,6 +35,9 @@ import org.hibernate.annotations.GenericGenerator;
 		
 		@Column(name="password")
 		private String password;
+
+		@OneToOne(mappedBy="users_profile", cascade=CascadeType.ALL)
+		private Allocation allocation;
 
 		public long getId() {
 			return id;

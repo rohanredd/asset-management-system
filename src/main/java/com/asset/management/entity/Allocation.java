@@ -2,14 +2,8 @@ package com.asset.management.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
     @Entity
@@ -35,14 +29,14 @@ import org.hibernate.annotations.GenericGenerator;
     	
     	@Column(name="comment")
     	private String comment;
-    	
-    	@OneToOne(cascade = CascadeType.ALL)
-    	@JoinColumn(name = "user_id")
-    	private Users users_profile;
 
-    	@OneToOne(cascade = CascadeType.ALL)
-    	@JoinColumn(name = "asset_id")
-    	private Assets assets;
+		@OneToOne(cascade = CascadeType.ALL)
+		@PrimaryKeyJoinColumn(name="id", referencedColumnName="user_id")
+		private Users users_profile;
+
+		@OneToOne(cascade = CascadeType.ALL)
+		@PrimaryKeyJoinColumn(name="id", referencedColumnName="asset_id")
+		private Assets assets;
 
 
 		public long getId() {
@@ -100,7 +94,21 @@ import org.hibernate.annotations.GenericGenerator;
 			return "Allocation [id=" + id + ", requestdate=" + requestdate + ", approvedate=" + approvedate
 					+ ", status=" + status + ", comment=" + comment + "]";
 		}
-		
-    	
-    }
+
+		public Users getUsers_profile() {
+			return users_profile;
+		}
+
+		public void setUsers_profile(Users users_profile) {
+			this.users_profile = users_profile;
+		}
+
+		public Assets getAssets() {
+			return assets;
+		}
+
+		public void setAssets(Assets assets) {
+			this.assets = assets;
+		}
+	}
     	
